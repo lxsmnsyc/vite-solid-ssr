@@ -1,5 +1,10 @@
 import { SuccessResult } from '../router';
-import { BOOLEAN_ATTRS, CLOSING_TAG, OPENING_TAG, VOID_ELEMENTS } from './constants';
+import {
+  BOOLEAN_ATTRS,
+  CLOSING_TAG,
+  OPENING_TAG,
+  VOID_ELEMENTS,
+} from './constants';
 import { MetaData } from './interface';
 import resolveMeta from './resolve-meta';
 
