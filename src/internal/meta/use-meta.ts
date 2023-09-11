@@ -15,16 +15,13 @@ export default function useMeta<T>(source: SuccessResult<T>) {
 
     while (node) {
       if (node.nodeType === Node.COMMENT_NODE) {
-        switch ((node as Comment).data) {
-          case OPENING_TAG:
-            begin = true;
-            break;
-          case CLOSING_TAG:
-            anchor = node;
-            break;
-          default:
-            nodes.push(node);
-            break;
+        if ((node as Comment).data === OPENING_TAG) {
+          begin = true;
+        } else if ((node as Comment).data === CLOSING_TAG) {
+          anchor = node;
+          break;
+        } else {
+          nodes.push(node);
         }
       } else if (begin) {
         nodes.push(node);

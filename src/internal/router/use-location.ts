@@ -1,7 +1,6 @@
 import { createSignal, createEffect, onCleanup } from 'solid-js';
 import { isServer } from 'solid-js/web';
-import { isLocalURL, normalizeURL } from './utilities';
-import { matchRoute, PageRouter } from './router-node';
+import { PageRouter } from './router-node';
 
 // https://github.com/GoogleChromeLabs/quicklink/blob/master/src/prefetch.mjs
 function hasPrefetch(): boolean {
@@ -180,12 +179,6 @@ export default function useLocation(
     push,
     replace,
     async prefetch(url, isPriority) {
-      if (isLocalURL(url)) {
-        const matchedNode = matchRoute(routes(), normalizeURL(url));
-        if (matchedNode && matchedNode.value && matchedNode.value.preload) {
-          await matchedNode.value.preload();
-        }
-      }
       return prefetch(url, isPriority);
     },
     back,

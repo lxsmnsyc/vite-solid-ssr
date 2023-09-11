@@ -57,7 +57,7 @@ async function createServer() {
   
   if (process.env.NODE_ENV === "production") {
     // Use Vite's built asset in prod mode.
-    loadServerEntry = () => import("./dist/server/entry-server.mjs");
+    loadServerEntry = () => import("./dist/server/entry-server.js");
     template = () => fs.readFile(path.join(process.cwd(), 'dist/client/index.html'), 'utf-8');
     app.use('/assets', express.static(path.join(process.cwd(), 'dist/client/assets')));
   } else {
@@ -113,6 +113,7 @@ async function createServer() {
         console.error(e)
         res.status(500).end(await serializeAsync(e))
       } else {
+        console.error(e)
         res.status(500).end('INTERNAL SERVER ERROR');
       }
     }
